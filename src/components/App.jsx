@@ -1,9 +1,17 @@
 import Phonebook from './Phonebook';
-import style from './app.module.scss';
 
 export const App = () => {
   return (
-    <div className={style.app}>
+    <div
+      style={{
+        display: 'flex',
+        paddingTop: '30px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 40,
+        color: '#010101',
+      }}
+    >
       <Phonebook />
     </div>
   );

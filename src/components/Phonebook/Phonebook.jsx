@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 import shortid from 'shortid';
@@ -7,10 +7,12 @@ import Filter from 'components/Filter';
 import FormPhonebook from 'components/FormPhonebook';
 import Contacts from 'components/Contacts';
 
-import style from './phonebook.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
 import { addContacts } from 'redux/contactSlice';
+import { addContact, fetchContacts } from 'redux/operations';
+
+import style from './phonebook.module.scss';
 
 function Phonebook() {
   const userContacts = useSelector(selectContacts);
@@ -18,8 +20,11 @@ function Phonebook() {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
   const handleInputChange = event => {
     const { name, value } = event.target;
 
@@ -27,8 +32,8 @@ function Phonebook() {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default:
         return;
@@ -45,10 +50,9 @@ function Phonebook() {
     }
 
     dispatch(
-      addContacts({
+      addContact({
         name: name.trim(),
-        number: number.trim(),
-        id: shortid(),
+        phone: phone.trim(),
       })
     );
     resetFormInput();
@@ -56,7 +60,7 @@ function Phonebook() {
 
   const resetFormInput = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
   return (
     <div className={style.wrapper}>
@@ -64,7 +68,7 @@ function Phonebook() {
       <FormPhonebook
         submit={formOnSubmitBtn}
         name={name}
-        number={number}
+        phone={phone}
         change={handleInputChange}
       />
       <div>
