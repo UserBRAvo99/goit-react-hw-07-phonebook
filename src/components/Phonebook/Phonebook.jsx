@@ -9,8 +9,8 @@ import Contacts from 'components/Contacts';
 
 import style from './phonebook.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'components/redux/selectors';
-import { addContacts } from 'components/redux/contactSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContacts } from 'redux/contactSlice';
 
 function Phonebook() {
   const userContacts = useSelector(selectContacts);
