@@ -41,6 +41,7 @@ export const fetchRemoveContacts = createAsyncThunk(
     }
   },
   {
+    //  condition - запобігає помилкам при швидких/постійних запитах на бек
     condition: (_, { getState }) => {
       const loading = getState().contacts.isLoading;
       if (loading) {
