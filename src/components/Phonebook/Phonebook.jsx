@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-import shortid from 'shortid';
-
 import Filter from 'components/Filter';
 import FormPhonebook from 'components/FormPhonebook';
 import Contacts from 'components/Contacts';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
-import { addContacts } from 'redux/contactSlice';
-import { addContact, fetchContacts } from 'redux/operations';
+import { fetchAddContact, fetchContacts } from 'redux/operations';
 
 import style from './phonebook.module.scss';
 
@@ -25,6 +22,7 @@ function Phonebook() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   const handleInputChange = event => {
     const { name, value } = event.target;
 
@@ -50,7 +48,7 @@ function Phonebook() {
     }
 
     dispatch(
-      addContact({
+      fetchAddContact({
         name: name.trim(),
         phone: phone.trim(),
       })

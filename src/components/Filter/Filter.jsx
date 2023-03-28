@@ -6,6 +6,7 @@ import { setFilterContacts } from 'redux/contactSlice';
 
 function Filter() {
   const dispatch = useDispatch();
+
   const inputFilterContacts = event => {
     dispatch(setFilterContacts(event.currentTarget.value.toLowerCase().trim()));
   };
