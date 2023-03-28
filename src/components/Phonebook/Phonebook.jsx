@@ -6,13 +6,16 @@ import FormPhonebook from 'components/FormPhonebook';
 import Contacts from 'components/Contacts';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts, selectLoading } from 'redux/selectors';
 import { fetchAddContact, fetchContacts } from 'redux/operations';
 
 import style from './phonebook.module.scss';
+import Loader from 'components/Loader';
 
 function Phonebook() {
   const userContacts = useSelector(selectContacts);
+
+  const isLoading = useSelector(selectLoading);
 
   const dispatch = useDispatch();
 
@@ -72,6 +75,7 @@ function Phonebook() {
       <div>
         <h2 className={style.title}>Contacts</h2>
         <Filter />
+        {isLoading && <Loader />}
         <Contacts />
       </div>
     </div>
